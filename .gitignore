@@ -1,3 +1,11 @@
 /node_modules
 /build
+
+database.sqlite3
+database.sqlite3-journal
+database.sqlite
+database.sqlite-journal
+database.db
+database.db-journal
+
 .env
