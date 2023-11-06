@@ -9,9 +9,9 @@ export class Cryptr {
     pbkdf2Iterations?: number
     salt?: number
     encoding?: IEncodingProps
-    constructor(salt: number = 10, encoding: IEncodingProps = 'latin1') {
+    constructor(salt: number = 64, pbkdf2Iterations: number = 100000, encoding: IEncodingProps = 'latin1') {
         this.salt = salt;
-        this.pbkdf2Iterations = this.salt * 1000;
+        this.pbkdf2Iterations = pbkdf2Iterations;
         this.encoding = encoding
     }
     _init() {

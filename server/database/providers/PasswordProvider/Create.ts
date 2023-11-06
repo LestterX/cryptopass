@@ -7,7 +7,7 @@ interface IPasswordProps extends Omit<IPassword, 'id'> { }
 
 const createProvider = async (password: IPasswordProps)/*: Promise<object | Error>*/ => {    
     try {
-        const encdec = new Cryptr(20)
+        const encdec = new Cryptr()
         const encryptedPassword = encdec.encryptPassword(password.password)
         const result = await prisma.password.create({
             data: {

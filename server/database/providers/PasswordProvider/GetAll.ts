@@ -1,28 +1,31 @@
-import { IPassword } from "../../models/Password";
 import { Cryptr } from "../../../shared/Cryptr";
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
+const SERVER_PREFIX = process.env.SERVER_PREFIX || '[Server]'
 
-const createProvider = async (password: IPassword)/*: Promise<object | Error>*/ => {    
+const getAllProvider = async (page: number, limit: number, filter: string): Promise<object| Error> => {    
     try {
-        const encdec = new Cryptr(20)
-        const encryptedPassword = encdec.encryptPassword(password.password)
-        const result = await prisma.password.create({
-            data: {
-                name: password.name,
-                password: encryptedPassword
+        const encdec = new Cryptr()
+        const result = await prisma.password.findMany({
+            where: {
+                name: {
+                    contains: filter
+                }
             },
-            select: {
-                id: true
-            }
+            take: Number(limit),
+            skip: (Number(page) - 1) * Number(limit)
         })
-        console.log('encryptedPassword: ', encryptedPassword);
-        return result.id
+        result.forEach(password => {
+            const decryptedPassword = encdec.decryptPassword(password.password)
+            password.password = decryptedPassword
+            console.log(`${SERVER_PREFIX} Password: ${decryptedPassword}`)      
+        })
+        return result
     } catch (error) {
         console.log(error);
-        return new Error('Erro ao criar registro no banco de dados')
+        return new Error('Erro ao buscar registros no banco de dados')
     }
 }
 
-export { createProvider }
+export { getAllProvider }
