@@ -9,7 +9,7 @@ export class Cryptr {
     pbkdf2Iterations?: number
     salt?: number
     encoding?: IEncodingProps
-    constructor(salt: number = 64, pbkdf2Iterations: number = 100000, encoding: IEncodingProps = 'latin1') {
+    constructor(salt: number = 96, pbkdf2Iterations: number = 150000, encoding: IEncodingProps = 'latin1') {
         this.salt = salt;
         this.pbkdf2Iterations = pbkdf2Iterations;
         this.encoding = encoding
@@ -23,18 +23,19 @@ export class Cryptr {
         })
         return crypdec
     }
-    encryptPassword(password: string): string {
+    encryptData(data: string): string {
         const crypdec = this._init()
-        console.log(`${SERVER_PREFIX} Encrypting ${password}...`);     
-        const encryptedPassword = crypdec.encrypt(password)
+        console.log(`${SERVER_PREFIX} Encrypting ${data}...`);     
+        const encryptedData = crypdec.encrypt(data)
         console.log(`${SERVER_PREFIX} Done!`);        
-        return encryptedPassword
+        return encryptedData
     }
-    decryptPassword(encryptedPassword: string): string {
+    decryptData(encryptedData: string): string {
         const crypdec = this._init()
-        console.log(`${SERVER_PREFIX} Decrypting ${encryptedPassword}...`);     
-        const decryptedPassword = crypdec.decrypt(encryptedPassword)
+        let decryptedData
+        console.log(`${SERVER_PREFIX} Decrypting ${encryptedData}...`); 
+        decryptedData = crypdec.decrypt(encryptedData)  
         console.log(`${SERVER_PREFIX} Done!`);
-        return decryptedPassword
+        return decryptedData
     }
 }

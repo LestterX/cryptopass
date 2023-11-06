@@ -9,11 +9,11 @@ export const create = async (req: Request<{}, {}, IPasswordProps>, res: Response
     console.log(req.body);
     if (!req.body.name || !req.body.password) {
         return res.status(StatusCodes.BAD_REQUEST).json({
-            message: 'Forneca os campos NAME e PASSWORD'
+            message: 'Os campos NAME e PASSWORD são obrigatórios'
         })
     }
-    const { name, password } = req.body
-    const id = await providers.passProviders.createProvider({ name, password})
+    const { name, password, email, cpf, assinaturaEletronica, conta, weblink, description } = req.body
+    const id = await providers.passProviders.createProvider({ name, password, email, cpf, assinaturaEletronica, conta, weblink, description })
     if (id instanceof Error) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             message: id.message
