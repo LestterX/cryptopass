@@ -1,5 +1,5 @@
 export interface IPassword {
-    id?: string,
+    id: string, //Required
     name: string, //Required
     password: string, //Required
     createdAt?: string,

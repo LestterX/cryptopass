@@ -1,10 +1,10 @@
-import { Router, Request, Response } from "express"
+import { Router } from "express"
+import { passwordController } from "../controllers/Password"
 
 const passRoutes = Router()
 const routesPrefix = '/password'
 
-passRoutes.get(`${routesPrefix}/`, (req: Request, res: Response) => {
-    return res.status(200).json({message: 'testPasswords'})
-})
+passRoutes.post(`${routesPrefix}/`, passwordController.create)
+passRoutes.get(`${routesPrefix}/`, passwordController.getAll)
 
 export { passRoutes }

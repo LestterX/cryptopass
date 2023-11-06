@@ -3,9 +3,8 @@ import { Cryptr } from "../../../shared/Cryptr";
 import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
-interface IPasswordProps extends Omit<IPassword, 'id'> { }
 
-const createProvider = async (password: IPasswordProps)/*: Promise<object | Error>*/ => {    
+const createProvider = async (password: IPassword)/*: Promise<object | Error>*/ => {    
     try {
         const encdec = new Cryptr(20)
         const encryptedPassword = encdec.encryptPassword(password.password)
