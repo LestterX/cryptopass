@@ -20,7 +20,9 @@
 - SQLite Database
 
 ## Installation
-You need to run the <b>setup.py file</b> to install the packages needed automaticly or you can open this repository folder on your terminal and run <b>npm install</b> or <b>yarn install</b> to intall all the packages in the <b>package.json file</b>
+1 - Run the **setup.py file** to automaticly install all the packages needed
+Or
+2 - Run <b>npm install</b> or <b>yarn install</b> on the terminal to manually install the packages from the **package.json file**
 
 ## Run and Access the system
 Once you installed all the packages, you can start the system by running the file **cryptopass.py**. <br>
