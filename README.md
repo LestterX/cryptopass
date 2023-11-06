@@ -12,7 +12,7 @@
 - HTML
 - CSS
 
-## Tech
+## Main Techs
 - Bcrypt
 - PrismIO
 - Json Web Token
