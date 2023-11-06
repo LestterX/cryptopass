@@ -23,6 +23,6 @@
 You need to run the <b>setup.py file</b> to install the packages needed automaticly or you can open this repository folder on your terminal and run <b>npm install</b> or <b>yarn install</b> to intall all the packages in the <b>package.json file</b>
 
 ## Run and Access the system
-Once you installed al the packeges, you can start the system by running the file **open.py**. <br>
+Once you installed all the packages, you can start the system by running the file **cryptopass.py**. <br>
 It will start the **NodeJS Server** and once successful, it will open the **index.htm file** on your default browser so you can access the system.
 
