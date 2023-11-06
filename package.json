@@ -1,13 +1,21 @@
 {
   "name": "cryptopass",
   "version": "1.0.0",
+  "author": {
+    "name": "Lestter Gabriel (https://github.com/LestterX)",
+    "url": "https://www.linkedin.com/in/lestter-gabriel-93390218a/"
+  },
   "main": "index.js",
   "license": "MIT",
+  "engines": {
+    "node": "18.x.x"
+  },
   "prisma": {
-    "schema": "server/database/schema.prisma"
+    "schema": "server/database/schema.prisma",
+    "migrations": "server/database/migrations"
   },
   "scripts": {
-    "start": "node public/index.js",
+    "start": "node build/server/server.js",
     "postinstall": "tsc"
   },
   "dependencies": {
