@@ -1,5 +1,5 @@
-import * as passProviders from './PasswordProvider'
+import * as passProviders from './PasswordProvider';
 
 export const providers = {
-    ...passProviders
-}
+  ...passProviders
+};
