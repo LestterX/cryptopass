@@ -6,25 +6,25 @@ const prisma = new PrismaClient()
 interface IPasswordProps extends Omit<IPassword, 'id'> { }
 
 const createProvider = async (password: IPasswordProps)/*: Promise<object | Error>*/ => {
+    
     try {
         const encdec = new Cryptr()
-        const encryptedPassword = encdec.encryptData(password.password)
-        let encryptedEmail = null
-        let encryptedCpf = null
-        let encryptedAssinaturaEletronica = null
-        let encryptedConta = null
-        if (password.email) { encryptedEmail = encdec.encryptData(password.email) }
-        if (password.cpf) { encryptedCpf = encdec.encryptData(password.cpf) }
-        if (password.assinaturaEletronica) { encryptedAssinaturaEletronica = encdec.encryptData(password.assinaturaEletronica) }
-        if (password.conta) { encryptedConta = encdec.encryptData(password.conta) }
+        const encryptedData: string[][] = encdec.transformData({
+            password: password.password,
+            email: password.email,
+            cpf: password.cpf,
+            assEletronica: password.assinaturaEletronica,
+            conta: password.conta,
+        }, 'encrypt');
+        
         const result = await prisma.password.create({
             data: {
                 name: password.name,
-                password: encryptedPassword,
-                email: encryptedEmail,
-                cpf: encryptedCpf,
-                assinaturaEletronica: encryptedAssinaturaEletronica,
-                conta: encryptedConta,
+                password: encryptedData[0][1],
+                email: encryptedData[1][1],
+                cpf: encryptedData[2][1],
+                assinaturaEletronica: encryptedData[3][1],
+                conta: encryptedData[4][1],
                 weblink: password.weblink,
                 description: password.description,
             },
@@ -32,8 +32,8 @@ const createProvider = async (password: IPasswordProps)/*: Promise<object | Erro
                 id: true,
             },
         })
-        console.log('encryptedPassword: ', encryptedPassword);
         return result.id
+
     } catch (error) {
         console.log(error);
         return new Error('Erro ao criar registro no banco de dados')

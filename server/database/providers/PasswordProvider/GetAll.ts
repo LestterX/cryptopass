@@ -11,31 +11,26 @@ const getAllProvider = async (page: number, limit: number, filter: string): Prom
             where: {
                 name: {
                     contains: filter
-                }
+                },
             },
             take: Number(limit),
             skip: (Number(page) - 1) * Number(limit)
         })
+
         result.forEach(password => {
-            const decryptedPassword = encdec.decryptData(password.password)
-            password.password = decryptedPassword
+            const decryptedData: string[][] = encdec.transformData({
+                password: password.password,
+                email: password.email,
+                cpf: password.cpf,
+                assEletronica: password.assinaturaEletronica,
+                conta: password.conta,
+            }, 'decrypt')
 
-            let decryptedEmail = null
-            let decryptedCpf = null
-            let decryptedAsinaturaEletronica = null
-            let decryptedConta = null
-
-            if(password.email) decryptedEmail = encdec.decryptData(password.email)
-            if(password.cpf) decryptedCpf = encdec.decryptData(password.cpf)
-            if(password.assinaturaEletronica) decryptedAsinaturaEletronica = encdec.decryptData(password.assinaturaEletronica)
-            if(password.conta) decryptedConta = encdec.decryptData(password.conta)
-
-            password.email = decryptedEmail
-            password.cpf = decryptedCpf
-            password.assinaturaEletronica = decryptedAsinaturaEletronica
-            password.conta = decryptedConta
-            
-            console.log(`${SERVER_PREFIX} Password: ${decryptedPassword}`)      
+            password.password = decryptedData[0][1]
+            password.email = decryptedData[1][1]
+            password.cpf = decryptedData[2][1]
+            password.assinaturaEletronica = decryptedData[3][1]
+            password.conta = decryptedData[4][1]
         })
         return result
     } catch (error) {
