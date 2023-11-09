@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 const SERVER_PREFIX = process.env.SERVER_PREFIX || '[Server]'
 
-const getAllProvider = async (page: number, limit: number, filter: string): Promise<object| Error> => {    
+const getAllProvider = async (page: number, limit: number, orderNameBy: 'asc' | 'desc', filter: string): Promise<object | Error> => {
     try {
         const encdec = new Cryptr()
         const result = await prisma.password.findMany({
@@ -12,6 +12,9 @@ const getAllProvider = async (page: number, limit: number, filter: string): Prom
                 name: {
                     contains: filter
                 },
+            },
+            orderBy: {
+                name: orderNameBy
             },
             take: Number(limit),
             skip: (Number(page) - 1) * Number(limit)
