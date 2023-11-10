@@ -3,8 +3,8 @@
 import { cardFunctions } from './cardFunctions.js';
 const cardsSection = document.querySelector('.cards');
 
-const card = cardFunctions.createCard({
-  name: 'asdwd',
+const card = (name) => cardFunctions.createCard({
+  name: name,
   password: '123456',
   assinaturaEletronica: '123514',
   conta: '7845',
@@ -16,4 +16,3 @@ const card = cardFunctions.createCard({
   weblink: 'https://www.minecraft.net/account_settings'
 });
 
-cardsSection.appendChild(card);
