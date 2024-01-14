@@ -9,7 +9,8 @@ const SERVER_PREFIX = process.env.SERVER_PREFIX || '[# Server]';
 
 const server = express();
 
-server.use(cors({origin: [`http://localhost:${SERVER_PORT}`, 'http://127.0.0.1:5500']}));
+// server.use(cors({ origin: [`http://localhost:${SERVER_PORT}`, 'http://127.0.0.1:5500'] }));
+server.use(cors({ origin: '*' }));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
