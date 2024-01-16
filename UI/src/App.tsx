@@ -1,25 +1,33 @@
 import { useEffect, useState } from "react";
 import Card from "./components/Card";
 import TopBar from "./components/TopBar";
+import { ICard } from "./models/Card";
+
 import axios from 'axios';
-import CreateCardForm from "./components/CreateCardForm";
+// import CreateCardForm from "./components/CreateCardForm";
 
 function App() {
-  const [posts, setPosts] = useState([]);
+  // {id: '', name: ''}
+  const [passwords, setPasswords] = useState<ICard[]>([]);
   useEffect(() => {
-    axios.get(`http://localhost:5550/password`)
-      .then(response => setPosts(response.data))
+    const getData = async () => {
+      axios.get(`http://localhost:5550/password`)
+        .then(response => setPasswords(response.data))
+    }
+    getData()
   }, [])
 
-  console.log(posts);
-  
+  console.log(passwords);
+
 
   return (
     <>
       <TopBar></TopBar>
-      <CreateCardForm></CreateCardForm>
+      {/* <CreateCardForm></CreateCardForm> */}
       <main className="w-screen h-screen bg-white ">
-        <Card name="Teste" password="12324234123"></Card>
+        {passwords.map(password => {
+          <Card key={"asdwd"} name="asdw" password="asdw"></Card>
+        })}
       </main>
     </>
   )
