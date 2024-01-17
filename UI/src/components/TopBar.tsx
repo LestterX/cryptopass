@@ -1,7 +1,7 @@
 import { MagnifyingGlass } from '@phosphor-icons/react'
 import CreateCardForm from './CreateCardForm'
 
-function TopBar() {
+const TopBar = () => {
   return (
     <>
       <nav className="flex content-center items-center w-screen h-16 bg-emerald-400 mb-3">

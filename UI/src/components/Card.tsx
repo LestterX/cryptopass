@@ -1,7 +1,7 @@
 import { ICard } from "../models/Card";
 interface ICardProps extends Omit<ICard, 'id'> { }
 
-function Card(props: ICardProps) {
+const Card = (props: ICardProps) => {
   return (
     <>
       <div className="flex flex-col w-80 h-96 bg-emerald-200">

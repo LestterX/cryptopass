@@ -17,7 +17,5 @@ export const getAll = async (req: Request<unknown, unknown, unknown, IQueryProps
       message: result.message
     });
   }
-  return res.status(StatusCodes.OK).json({
-    result
-  });
+  return res.status(StatusCodes.OK).json(result);
 };
