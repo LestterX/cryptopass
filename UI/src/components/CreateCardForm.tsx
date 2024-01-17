@@ -1,4 +1,4 @@
-import { PlusCircle, Crosshair } from "@phosphor-icons/react";
+import { PlusCircle, X } from "@phosphor-icons/react";
 import * as Dialog from "@radix-ui/react-dialog";
 
 const CreateCardForm = () => {
@@ -51,7 +51,7 @@ const CreateCardForm = () => {
           </div>
           <Dialog.Close asChild>
             <button type="button" className="absolute top-1 right-1">
-              <Crosshair size={32} color="black"></Crosshair>
+              <X size={32} color="red"></X>
             </button>
           </Dialog.Close>
         </Dialog.Content>
