@@ -13,16 +13,25 @@ const App = () => {
     const getData = async () => {
       axios.get(`http://localhost:5550/password`)
         .then(response => { setPasswords(response.data); })
-        .catch((err) => { alert(err) })
+        .catch(() => { alert("Parece que não há conexão com o servidor") })
     }
     getData()
   }, [])
+
+  if (passwords.length < 1) return (
+    <>
+      <div className="w-screen h-8 bg-emerald-600">
+        <p className="text-white text-center text-3xl">NÃO HÁ SENHAS SALVAS</p>
+      </div>
+    </>
+  )
 
   return (
     <>
       <TopBar></TopBar>
       <main className="w-screen h-screen bg-white">
         <div className="w-3/4 h-screen mx-auto flex flex-row flex-wrap gap-4">
+
           {passwords.map((password, index) => {
             return (
               <Card

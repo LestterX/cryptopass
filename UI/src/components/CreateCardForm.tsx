@@ -8,15 +8,15 @@ const CreateCardForm = () => {
         <PlusCircle size={32} color="black" className="hover:cursor-pointer"></PlusCircle>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay></Dialog.Overlay>
-        <Dialog.Content>
+        <Dialog.Overlay className="bg-white/5 w-screen h-screen fixed inset-0 backdrop-blur-sm"></Dialog.Overlay>
+        <Dialog.Content className="">
           <div className="absolute top-0 left-0 w-screen h-screen flex items-center justify-center">
             <form name="formCreateCard" id="formCreateCard"
               action="http://localhost:5550/password" method="POST"
-              className="p-6 w-80 bg-slate-500">
+              className="p-6 w-80 bg-emerald-400 relative rounded-lg">
               <div>
                 <p>Nome</p>
-                <input name="name" id="name" type="text" className="w-full" />
+                <input maxLength={16} name="name" id="name" type="text" className="w-full" />
               </div>
               <div>
                 <p>Senha</p>
@@ -46,14 +46,14 @@ const CreateCardForm = () => {
                 <p>Descrição</p>
                 <input name="description" id="description" type="text" className="w-full" />
               </div>
-              <button type="submit" className="w-full h-8 mt-5 font-bold bg-emerald-400">CRIAR</button>
+              <button type="submit" className="w-full h-8 mt-5 font-bold bg-emerald-200" >CRIAR</button>
+              <Dialog.Close asChild className="absolute top-1 right-1">
+                <button type="button" className="">
+                  <X size={32} color="red"></X>
+                </button>
+              </Dialog.Close>
             </form>
           </div>
-          <Dialog.Close asChild>
-            <button type="button" className="absolute top-1 right-1">
-              <X size={32} color="red"></X>
-            </button>
-          </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -1,5 +1,20 @@
 import { ICard } from "../models/Card";
+import * as dayjs from 'dayjs';
 interface ICardProps extends Omit<ICard, 'id'> { }
+
+const formatDate = (rawDate: string): string => {
+  const day = String(dayjs(rawDate).get('date')).length <= 1
+    ? '0' + String(dayjs(rawDate).get('date'))
+    : String(dayjs(rawDate).get('date'))
+  const month = String(dayjs(rawDate).get('month') + 1).length <= 1
+    ? '0' + String(dayjs(rawDate).get('month') + 1)
+    : String(dayjs(rawDate).get('month') + 1)
+  const year = dayjs(rawDate).get('year')
+  const hour = dayjs(rawDate).get('hour')
+  const minutes = dayjs(rawDate).get('minutes')
+  const formattedDate = `${day}/${month}/${year} ${hour}:${minutes}`
+  return String(formattedDate);
+}
 
 const Card = (props: ICardProps) => {
   return (
@@ -8,9 +23,15 @@ const Card = (props: ICardProps) => {
         <div className="bg-emerald-400 text-center text-3xl font-black">
           <h1>{String(props.name).toUpperCase() || 'Sem Nome'}</h1>
         </div>
-        <div className="flex flex-row justify-between m-3">
-          <span>Criado: {props.createdAt || 'Vazio'}</span>
-          <span>Atualizado: {props.updatedAt || 'Vazio'}</span>
+        <div className="flex flex-row justify-between m-3 text-sm">
+          <div className="flex flex-col items-center">
+            <span>Criado</span>
+            <span>{formatDate(String(props.createdAt)) || 'Vazio'}</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span>Atualizado</span>
+            <span> {formatDate(String(props.updatedAt)) || 'Vazio'}</span>
+          </div>
         </div>
         <div className="bg-white flex flex-2 h-full">
           <ul>
@@ -24,7 +45,7 @@ const Card = (props: ICardProps) => {
         </div>
         <div className="flex gap-2 flex-col">
           <div className="">
-            <span>Descrição: {props.description || 'Vazio'}</span>
+            <span>{String(props.description) || 'Vazio'}</span>
           </div>
           <div className="">
             <button className="place-self-center bg-emerald-400 w-full h-8 leading-8 text-center" type="button" onClick={(e) => { e.preventDefault(); alert(props.name) }}>Editar</button>
