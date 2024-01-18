@@ -38,7 +38,19 @@ const Card = (props: ICardProps) => {
             <li><b>Senha:</b> {props.password || 'Vazio'}</li>
             <li><b>E-mail:</b> {props.email || 'Vazio'}</li>
             <li><b>CPF:</b> {props.cpf || 'Vazio'}</li>
-            <li><b>Link:</b> {props.weblink || 'Vazio'}</li>
+            <li><b>Link:</b> {
+              (function genLink() {
+                if (String(props.weblink).startsWith('http')) {
+                  return (
+                    <a href={props.weblink} target="_blank"
+                    className="text-blue-700 underline"
+                    >Acessar</a>
+                  )
+                } else {
+                  return 'Vazio'
+                }
+              }())
+            } </li>
             <li><b>conta:</b> {props.conta || 'Vazio'}</li>
             <li><b>Assinatura Eletrônica:</b> {props.assinaturaEletronica || 'Vazio'}</li>
           </ul>
