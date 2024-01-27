@@ -38,6 +38,7 @@ const App = () => {
             return (
               <Card
                 key={password.id}
+                id={password.id}
                 name={password.name}
                 password={password.password}
                 assinaturaEletronica={password.assinaturaEletronica}

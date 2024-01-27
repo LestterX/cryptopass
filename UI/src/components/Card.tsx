@@ -1,6 +1,6 @@
 import { ICard } from "../models/Card";
 import * as dayjs from 'dayjs';
-interface ICardProps extends Omit<ICard, 'id'> { }
+import UpdateCardForm from "./UpdateCardForm";
 
 const formatDate = (rawDate: string): string => {
   const day = String(dayjs(rawDate).get('date')).length <= 1
@@ -16,10 +16,10 @@ const formatDate = (rawDate: string): string => {
   return String(formattedDate);
 }
 
-const Card = (props: ICardProps) => {
+const Card = (props: ICard) => {
   return (
     <>
-      <div className="flex flex-col w-80 h-96 bg-emerald-200">
+      <div key={props.id} className="flex flex-col w-80 h-96 bg-emerald-200">
         <div className="bg-emerald-400 text-center text-3xl font-black">
           <h1>{String(props.name).toUpperCase() || 'Sem Nome'}</h1>
         </div>
@@ -60,12 +60,16 @@ const Card = (props: ICardProps) => {
             <span>{String(props.description) || 'Vazio'}</span>
           </div>
           <div className="">
-            <button className="place-self-center bg-emerald-400 w-full h-8 leading-8 text-center" type="button"
-              onClick={(e) => {
-                e.preventDefault(); 
-                alert(props.name)
-              }}
-            >Editar</button>
+            <UpdateCardForm
+              id={props.id}
+              name={props.name}
+              password={props.password}
+              assinaturaEletronica={props.assinaturaEletronica}
+              conta={props.conta}
+              cpf={props.cpf}
+              description={props.description}
+              email={props.email}
+            ></UpdateCardForm>
           </div>
         </div>
       </div>
