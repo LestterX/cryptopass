@@ -43,7 +43,7 @@ const Card = (props: ICardProps) => {
                 if (String(props.weblink).startsWith('http')) {
                   return (
                     <a href={props.weblink} target="_blank"
-                    className="text-blue-700 underline"
+                      className="text-blue-700 underline"
                     >Acessar</a>
                   )
                 } else {
@@ -60,7 +60,12 @@ const Card = (props: ICardProps) => {
             <span>{String(props.description) || 'Vazio'}</span>
           </div>
           <div className="">
-            <button className="place-self-center bg-emerald-400 w-full h-8 leading-8 text-center" type="button" onClick={(e) => { e.preventDefault(); alert(props.name) }}>Editar</button>
+            <button className="place-self-center bg-emerald-400 w-full h-8 leading-8 text-center" type="button"
+              onClick={(e) => {
+                e.preventDefault(); 
+                alert(props.name)
+              }}
+            >Editar</button>
           </div>
         </div>
       </div>

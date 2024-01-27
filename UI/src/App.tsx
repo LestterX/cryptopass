@@ -34,10 +34,10 @@ const App = () => {
           }
         }())}
         <div className="w-3/4 h-screen mx-auto flex flex-row flex-wrap gap-4">
-          {passwords.map((password, index) => {
+          {passwords.map((password) => {
             return (
               <Card
-                key={index}
+                key={password.id}
                 name={password.name}
                 password={password.password}
                 assinaturaEletronica={password.assinaturaEletronica}
